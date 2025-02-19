@@ -5,18 +5,7 @@ import Stats from 'three/addons/libs/stats.module.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
-var skine_texture = new Array();
 var actionlist = new Array();
-
-let i =1;
-while (i<5)
-{
-    skine_texture[i] = new THREE.TextureLoader().load('models/gltf/female/skine/data-'+i+'.png');
-    skine_texture[i].flipY = false;
-    i++;
-
-}
-i = 2;
 
 let scene, renderer, camera, stats;
 let model, skeleton, mixer, clock;
@@ -132,4 +121,3 @@ function animate() {
     renderer.render( scene, camera );
 
 }
-
