@@ -10,9 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "three": "^0.173.0",
+    "three": "^0.173.0"
+  },
+  "devDependencies": {
     "vite": "^6.1.1"
   },
-  "devDependencies": {},
-  "description": ""
+  "description": "",
+  "type": "commonjs"
 }
