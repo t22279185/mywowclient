@@ -18,8 +18,6 @@ function init() {
 
 
     camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 100 );
-    camera.position.set( 10, 2, 0 );
-    camera.lookAt( 1, 20, 0 );
 
     clock = new THREE.Clock();
 
@@ -65,17 +63,21 @@ function init() {
 
         model = gltf.scene;
         scene.add( model );
-
+        model.position.set( 0, 4, 0 );
+        camera.position.set( 15, 6, 0 );
+        camera.lookAt( 0, 6, 0 );
+    
         const animations = gltf.animations;
 
         mixer = new THREE.AnimationMixer( model );
+
         let i=0;
-        while(i<129){
-            actionlist[i] = mixer.clipAction( animations[ i ] );
-            console.log("add action" + i );
+        while(i < 140){
+            actionlist[animations[ i ].name] = mixer.clipAction( animations[ i ] );
+            console.log(animations[ i ].name);
             i ++;
         }
-        actionlist[127].play();
+        actionlist["Sleep (ID 100 variation 0)"].play();
   
 
         animate();
@@ -97,7 +99,7 @@ function init() {
     // CONTROLS
 
     let controls = new OrbitControls( camera, renderer.domElement );
-    controls.target.set( 0, 0.5, 0 );
+    controls.target.set( 0, 6, 0 );
     controls.update();
 }
 
