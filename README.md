@@ -1,3 +1,8 @@
+# 添加项目依赖
+pnpm install
+
+
+
 # 创建 Node.js 项目
 
 ## 通过运行npm init -y，NPM 将创建一个package.json包含运行 Node.js 项目所需的最少信息。
@@ -13,6 +18,6 @@ npm install --save-dev vite
 npm install --save three
 
 ## 终端运行:
-npx vite
+npx vite  --host
 npx serve
 
