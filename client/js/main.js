@@ -54,6 +54,13 @@ function init() {
     scene.add( mesh );
 
     const loader = new GLTFLoader();
+    loader.load( 'models/gltf/chapel/duskwoodchapel.gltf', function ( gltf ) {
+
+        const house = gltf.scene;
+        scene.add( house );
+
+    } );
+
     loader.load( 'models/gltf/female/humanfemale.gltf', function ( gltf ) {
 
         model = gltf.scene;
