@@ -59,10 +59,6 @@ function init() {
         model = gltf.scene;
         scene.add( model );
 
-        skeleton = new THREE.SkeletonHelper( model );
-        skeleton.visible = false;
-        scene.add( skeleton );
-
         const animations = gltf.animations;
 
         mixer = new THREE.AnimationMixer( model );
