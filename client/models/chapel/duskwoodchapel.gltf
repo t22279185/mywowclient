@@ -807,37 +807,37 @@
 	"scene": 0,
 	"images": [
 		{
-			"uri": "textures\\roof\\mm_aduskwood_roof_02.png"
+			"uri": "dungeons\\textures\\roof\\mm_aduskwood_roof_02.png"
 		},
 		{
-			"uri": "textures\\walls\\mm_aduskwood_wall_03.png"
+			"uri": "dungeons\\textures\\walls\\mm_aduskwood_wall_03.png"
 		},
 		{
-			"uri": "textures\\floor\\mm_duskwood_stonefloor_01.png"
+			"uri": "dungeons\\textures\\floor\\mm_duskwood_stonefloor_01.png"
 		},
 		{
-			"uri": "textures\\walls\\mm_aduskwood_int_wall_01.png"
+			"uri": "dungeons\\textures\\walls\\mm_aduskwood_int_wall_01.png"
 		},
 		{
 			"uri": "textures\\walls\\mm_duskwood_abbey_wall_01.png"
 		},
 		{
-			"uri": "textures\\trim\\mm_duskwood_woodtrim_01.png"
+			"uri": "dungeons\\textures\\trim\\mm_duskwood_woodtrim_01.png"
 		},
 		{
-			"uri": "textures\\windows\\mm_aduskwood_wnd_int__01.png"
+			"uri": "dungeons\\textures\\windows\\mm_aduskwood_wnd_int__01.png"
 		},
 		{
-			"uri": "textures\\combos\\mm_duskwood_combo_03.png"
+			"uri": "dungeons\\textures\\combos\\mm_duskwood_combo_03.png"
 		},
 		{
-			"uri": "textures\\trim\\mm_duskwood_design_01.png"
+			"uri": "dungeons\\textures\\trim\\mm_duskwood_design_01.png"
 		},
 		{
-			"uri": "textures\\wood\\mm_beam_end__01x.png"
+			"uri": "dungeons\\textures\\wood\\mm_beam_end__01x.png"
 		},
 		{
-			"uri": "textures\\trim\\mm_duskwood_stonebase_01.png"
+			"uri": "dungeons\\textures\\trim\\mm_duskwood_stonebase_01.png"
 		}
 	],
 	"textures": [
