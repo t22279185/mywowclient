@@ -8,7 +8,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 var actionlist = new Array();
 
-let scene, renderer, camera, stats;
+let scene, renderer, camera;
 let model, mixer, clock;
 
 init();
