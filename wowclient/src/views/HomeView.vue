@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+
+console.log("xxxx");
+
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <div class="about">
+    <h1> 一个测试</h1>
+  </div>
 </template>
