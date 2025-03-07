@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-
+import { Tabbar, TabbarItem } from 'vant';
 import * as THREE from 'three';
-import Stats from 'three/addons/libs/stats.module.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
@@ -137,6 +136,7 @@ function animate() {
     </div>
   </header>
    <RouterView />
+
 
 </template>
 
