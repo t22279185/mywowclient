@@ -1,7 +1,9 @@
 
 
-
 ## 添加项目依赖
+
+npm install -g pnpm@latest-10
+
 pnpm install
 
 ## 终端运行:

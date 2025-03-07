@@ -35,7 +35,8 @@ init();
 
 function init() {
 
-    const container = document.getElementById( 'container' );
+    const container = document.body;
+   //const container = document.getElementById( 'container' );
 
 
     camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 100 );
