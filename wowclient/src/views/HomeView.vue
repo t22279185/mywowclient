@@ -35,9 +35,10 @@ function backword(){
 </script>
 
 <template>
+<div>
 <Button type="primary" @click="test">测试</Button>
 <Button type="primary" @click="forword">前进</Button>
 <Button type="primary" @click="backword">后退</Button>
-
+</div>
 
 </template>
