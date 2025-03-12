@@ -22,7 +22,7 @@ export function init() {
 
     container.innerHTML = "";
 
-    camera = new THREE.PerspectiveCamera( 40, 800 / 600, 0.1, 1000 );
+    camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
     clock = new THREE.Clock();
 
