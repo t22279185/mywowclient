@@ -8,8 +8,9 @@ import CANNON from 'cannon';
 
 var actionlist = new Array();
 
-let house,scene, renderer, camera;
+let house,scene, renderer, camera,controls;
 let model, mixer, clock,body;
+
 
 const world = new CANNON.World();
 world.gravity.set(0,-9.82, 0)
@@ -78,40 +79,48 @@ export function init() {
     loader.load( 'models/gltf/chapel/duskwoodchapel.gltf', function ( gltf ) {
 
         house = gltf.scene;
+        house.position.set( 0, 0, 30 );
         scene.add( house );
-        house.traverse( function ( child ) {
-            console.log(child)
-            console.log(child.position)
+        house.traverse( function ( item ) {
 
-            if ( child instanceof THREE.Mesh ) {
-                let geometry = child.geometry;
-                let material = child.material;
-                let mesh = new THREE.Mesh(geometry, material);
+           // console.log(item.name);
 
-     
-                //scene.add(mesh);
-                mesh.scale.set(1,1,1)
-                const wireframeGeometry = new THREE.WireframeGeometry( geometry );
-                const wireframeMaterial = new THREE.LineBasicMaterial( { color: 0xffffff } );
-                const wireframe = new THREE.LineSegments( wireframeGeometry, wireframeMaterial );
-                //mesh.add( wireframe );
+//            if ( item instanceof THREE.Mesh ) {
+            if ( item.name == "duskwoodchapel_int011" ) {
 
-                let box3 = new THREE.Box3();
-                box3.expandByObject(child);//计算模型包围盒
-                const size = new THREE.Vector3();
-                box3.getSize(size);//包围盒计算箱子的尺寸
-                console.log(size);
-                const halfExtents = new CANNON.Vec3(size.x/2, size.y/2, size.z/2);
-                const meshbody = new CANNON.Body({
-                    mass: 0,//碰撞体质量
-                    material: child.material,//碰撞体材质
-                    shape: new CANNON.Box(halfExtents),
+                item.castShadow = true;
+                item.receiveShadow = true;
+
+                //item.material.wireframe = true;
+                const geometry = item.geometry;
+                const material = item.material;
+                const tempmesh = new THREE.Mesh( geometry, material );
+                //tempmesh.material.wireframe = true;
+                tempmesh.position.set( 20, -1, 0 );
+
+                scene.add( tempmesh );
+                let wTrack = new CANNON.Body({
+                    mass: 0,
+                    material: groundMaterial,
                 });
-                meshbody.position.copy(child.position);
-                meshbody.quaternion.setFromEuler(-Math.PI / 2, 0, 0);//旋转规律类似threejs 平面
+                const position = tempmesh.geometry.attributes.position;
+                const vertices = new Float32Array(position.count * 3);
+                for (let i = 0; i < position.count; i++) {
+                    vertices[i * 3] = position.getX(i);
+                    vertices[i * 3 + 1] = position.getY(i);
+                    vertices[i * 3 + 2] = position.getZ(i);
+                }
+                let indices = tempmesh.geometry.index.array;
+                let wShape = new CANNON.Trimesh(vertices,indices);
+                wTrack.addShape(wShape);
+                wTrack.position.copy(tempmesh.position);
+                wTrack.quaternion.copy(tempmesh.quaternion);
+                //wTrack.quaternion.setFromEuler(-Math.PI / 2, 0, 0);//旋转规律类似threejs 平面
+                console.log(wTrack);
 
-                world.addBody(meshbody);                
-            }
+                world.addBody(wTrack);
+
+            }     
           })
       
 
@@ -120,10 +129,11 @@ export function init() {
     loader.load( 'models/gltf/female/humanfemale.gltf', function ( gltf ) {
 
         model = gltf.scene;
+        model.controls = controls;
         scene.add( model );
         model.position.set( 40, 6, 0 );
         camera.position.set( 60, 7, 0 );
-        camera.lookAt( 0, 0, 0 );
+        camera.lookAt( 40, 0, 0 );
     
         const animations = gltf.animations;
 
@@ -147,17 +157,20 @@ export function init() {
         model.size = size;
 
         body = new CANNON.Body({
-        mass: 5,//碰撞体质量
-        material: model,//碰撞体材质
+        mass: 1,//碰撞体质量
+        material: groundMaterial,//碰撞体材质
         shape: new CANNON.Box(new CANNON.Vec3(size.x/2, size.y/2, size.z/2))
         });
         body.position.copy(model.position);
         world.addBody(body);
-     
+        body.addEventListener('collide', (event) => {
+            console.log('碰撞事件', event);
+        })     
         // 设置地面材质和小球材质之间的碰撞反弹恢复系数
-        const contactMaterial = new CANNON.ContactMaterial(groundMaterial, model, {
-            restitution: 0, //反弹恢复系数
+        const contactMaterial = new CANNON.ContactMaterial(groundMaterial, groundMaterial, {
+            restitution: 0.1, //反弹恢复系数
         })
+
         // 把关联的材质添加到物理世界中
         world.addContactMaterial(contactMaterial)
 
@@ -177,7 +190,7 @@ export function init() {
 
     // CONTROLS
     let controls = new OrbitControls( camera, renderer.domElement );
-    controls.target.set( 0, 6, 0 );
+    controls.target.set( 40, 6, 0 );
     controls.update();
 }
 
@@ -213,8 +226,14 @@ function animate() {
 }
 
 
-export function test() {
+export function getActionlist() {
     return actionlist;
+  }
+
+  export function getControls() {
+    console.log(controls);
+
+    return controls;
   }
 
 export function getPlayerPosition() {
@@ -223,7 +242,8 @@ export function getPlayerPosition() {
     
 export default {
     getPlayerPosition,
-    test,
+    getControls,
+    getActionlist,
     init,
   };
   
